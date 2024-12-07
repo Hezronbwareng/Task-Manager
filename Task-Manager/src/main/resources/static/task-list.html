@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Tasks</title>
+</head>
+<body>
+<h1>Your Tasks</h1>
+<form action="/tasks/search" method="post">
+    <input type="text" name="title" placeholder="Search by title">
+    <input type="text" name="status" placeholder="Search by status">
+    <input type="date" name="dueDate" placeholder="Search by due date">
+    <button type="submit">Search</button>
+</form>
+
+<div>
+    <h2>Categories</h2>
+    <ul>
+        <li th:each="category : ${categories}">
+            <a th:href="@{/tasks/category/{categoryName}(categoryName=${category.name})}" th:text="${category.name}"></a>
+        </li>
+    </ul>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Due Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.category.name}"></td>
+        <td th:text="${task.status}"></td>
+        <td th:text="${task.dueDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
